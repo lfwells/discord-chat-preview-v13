@@ -56,12 +56,14 @@ function convertDiscordEmbed(embed) {
             embedData.video.proxy_url = embedData.video.proxyURL;
     }
 
+
     return {
         title:          embed.title,
         description:    embed.description,
         color:          embed.hexColor,
         url:            embed.url,
         data:           embedData,
+        fields:         embed.fields,
     }
 }
 
@@ -233,7 +235,7 @@ export function createRouter(discord, channels = []) {
     
     // Message create, we will broadcast to each and every valid object
     discord.on('messageUpdate', async (oldMessage, newMessage) => {
-        if (!newMessage.author || newMessage.author.bot) return;
+        if (!newMessage.author) return;
         const converted    = await convertDiscordMessage(newMessage);
         connections.forEach(connection => {
             if (connection.channelId == newMessage.channelId) 
