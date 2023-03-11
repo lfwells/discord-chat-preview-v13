@@ -23,7 +23,7 @@ let currentSocket;
 let _socketBackoffTimeMS = 1000;
 
 function initializeWebsocket() {
-    const protocol = 'ws';
+    const protocol = window.location.protocol == "https:" ? 'wss' : 'ws';
     currentSocket = new WebSocket(`${protocol}://${window.location.host}${window.location.pathname}${window.location.search}`);
 
     currentSocket.addEventListener('open', function(event) {
