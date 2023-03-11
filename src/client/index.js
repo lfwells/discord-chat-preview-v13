@@ -24,7 +24,7 @@ let _socketBackoffTimeMS = 1000;
 
 function initializeWebsocket() {
     const protocol = 'ws';
-    currentSocket = new WebSocket(`${protocol}://${window.location.host}${window.location.pathname}`);
+    currentSocket = new WebSocket(`${protocol}://${window.location.host}${window.location.pathname}${window.location.search}`);
 
     currentSocket.addEventListener('open', function(event) {
         console.log('socket has open');

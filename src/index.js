@@ -305,6 +305,17 @@ export function createRouter(discord, channels = []) {
                 } else {
                     connection.ping();
                     connection.send('discord', convertDiscordChannel(channel), 'channel.update');
+
+                    //now also fetch the last 10 messages from this channel
+                    if (req.query.previous_messages == null) return;
+
+                    channel.messages.fetch({ limit: req.query.previous_messages }).then(messages => {
+                        //send each message to the client in reverse order
+                        messages = messages.reverse();
+                        messages.forEach(message => {
+                            connection.send('discord', convertDiscordMessage(message), 'message.create');
+                        });
+                    });
                 }
             });
         }
@@ -336,7 +347,7 @@ export function createRouter(discord, channels = []) {
     router.get('/stats', (req, res, next) => {
         res.json({
             connections:    connections.length,
-            channels:       channels,
+            //channels:       channels,
         });
     });
 
@@ -344,7 +355,7 @@ export function createRouter(discord, channels = []) {
     // Gets a visual room that will connect to the ws for live messages
     router.get(`/:channel`, (req, res, next) => {
         if (channels.length && channels.indexOf(req.params.channel) < 0) {
-            res.send('bad request: unkown channel');
+            res.send('bad request: unknown channel');
             return;
         }
         res.setHeader('X-Channel', req.params.channel);
