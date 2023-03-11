@@ -334,7 +334,6 @@ export function createRouter(discord, channels = []) {
         console.log('connection established: ', connections.length);
     };
     router.ws(`/:channel`, handleSocket);
-    router.wss(`/:channel`, handleSocket);
 
     
     //=== File Routes
