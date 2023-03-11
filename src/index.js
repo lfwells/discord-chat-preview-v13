@@ -283,7 +283,7 @@ export function createRouter(discord, channels = []) {
      */
 
     // Create the websocket endpoint
-    router.ws(`/:channel`,  function(ws, req) {
+    var handleSocket = function(ws, req) {
         console.log('new channel ws');
         if (channels.length && channels.indexOf(req.params.channel) < 0) {
             console.log('bad request for WS, dont know jack shit');
@@ -332,7 +332,9 @@ export function createRouter(discord, channels = []) {
         });
 
         console.log('connection established: ', connections.length);
-    });
+    };
+    router.ws(`/:channel`, handleSocket);
+    router.wss(`/:channel`, handleSocket);
 
     
     //=== File Routes
