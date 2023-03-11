@@ -62,6 +62,11 @@ function initializeMode() {
             break;
     }
     currentMode.initialize(document.body);
+
+    if (params.get('mylo'))
+    {
+        $(document.body).addClass("mylo");
+    }
 }
 
 /** @returns {Number} unix epoch time */

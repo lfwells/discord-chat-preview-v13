@@ -23,9 +23,18 @@ body {
     background: transparent;
 }
 
-.d-emoji {
-    max-width: 1em;
-}
-* {
-    color: white;
+.mylo {
+    .d-emoji {
+        max-width: 1em;
+    }
+    * {
+        color: white;
+    }
+    .row.content {
+        margin-bottom: 2em;
+    }
+    .row em strong {
+        font-size: large;
+        font-style: normal;
+    }
 }
