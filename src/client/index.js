@@ -159,6 +159,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     document.simulateMessage = processMessage;
 
+    /*
     // Try to use the test data
     try {
         const {data} = await import('../../sample.js');
@@ -166,5 +167,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         processMessages(data, 1);
     } catch(_) { 
         // throw out the error because this is only used for testing.
-    }
+    }*/
 });
