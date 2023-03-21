@@ -131,4 +131,5 @@ out
 
 
 # Sample file
-sample.json
+/sample*
+/dist/sample*

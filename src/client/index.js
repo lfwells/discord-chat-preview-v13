@@ -81,6 +81,7 @@ function now()
  */
 function processMessage(message) {
     const { origin, data, content } = typeof(message) === 'string' ? JSON.parse(message) : message;
+    //console.log(message);
     switch(origin) {
         case 'system':
             console.log('[SERVER]', content);
@@ -146,7 +147,8 @@ function processMessages(messages, delay = 0) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', async () => {
     
     // Set the body configuration
     if (params.has('transparent'))
@@ -154,5 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeMode();
     initializeWebsocket();
-    document.simulateDiscordMessages = processMessages;
+    
+    document.simulateMessage = processMessage;
+
+    // Try to use the test data
+    try {
+        const {data} = await import('../../sample.js');
+        console.log('Performing test with data', data);
+        processMessages(data, 1);
+    } catch(_) { 
+        // throw out the error because this is only used for testing.
+    }
 });
