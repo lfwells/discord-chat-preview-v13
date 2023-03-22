@@ -19,7 +19,7 @@
     .reaction {
         float: left;
         padding: 0px 5px;
-        border-radius: 5px;
+        border-radius: $border-radius;
         border: 1px solid $color-blurple;
         background: transparentize($color-blurple, 1-0.30);
         color: $color-off-white;
@@ -36,4 +36,15 @@
         text-align: right;
         margin: auto;
     }
+}
+
+.d-spoiler {
+    background: #424549;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+blockquote {
+    padding-left: 8px;
+    border-left: 3px solid $color-off-black;
 }

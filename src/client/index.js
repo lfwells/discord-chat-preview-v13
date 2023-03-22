@@ -81,7 +81,6 @@ function now()
  */
 function processMessage(message) {
     const { origin, data, content } = typeof(message) === 'string' ? JSON.parse(message) : message;
-    //console.log(message);
     switch(origin) {
         case 'system':
             console.log('[SERVER]', content);
@@ -97,7 +96,8 @@ function processMessage(message) {
             break;
 
         case 'discord':
-            console.log('[DISCORD]', content, data);
+            console.log('[DISCORD]', message);
+            //console.log('[DISCORD]', content, data);
             if (currentMode != null) {
                 switch(content) {
                     default:
