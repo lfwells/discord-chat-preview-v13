@@ -9,7 +9,7 @@ const Embed = DJS_VERSION == DJS_14 ? djs.Embed : djs.MessageEmbed;
 
 import path from 'path';
 import {fileURLToPath} from 'url';
-import { Attachment } from "discord.js";
+//import { Attachment } from "discord.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -31,7 +31,7 @@ function convertDiscordMessage(message) {
         member:         convertDiscordMember(message.member), 
         mentions:       convertDiscordMentions(message.mentions),
         embeds:         message.embeds ? message.embeds.map(embed => convertDiscordEmbed(embed)) : [],
-        attachments:    message.attachments ? message.attachments.map(att => convertDiscordAttachment(att)) : [],
+        //attachments:    message.attachments ? message.attachments.map(att => convertDiscordAttachment(att)) : [],
         reference:      message.reference ? message.reference.messageId : null
     }
 }
