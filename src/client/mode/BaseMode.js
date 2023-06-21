@@ -123,10 +123,10 @@ export function markdown(message) {
         if (l.startsWith("### ")) return l.replace("### ", "<h3>")+"</h3>";
         if (l.startsWith("## ")) return l.replace("## ", "<h2>")+"</h2>";
         if (l.startsWith("# ")) return l.replace("# ", "<h1>")+"</h1>";
-        if (l.startsWith("    -")) return l.replace("    -", `${tab(4)}○`);
-        if (l.startsWith("   -")) return l.replace("   -", `${tab(3)}•`);
-        if (l.startsWith("  -")) return l.replace("  -", `${tab(2)}○`);
-        if (l.startsWith(" -")) return l.replace(" -", `${tab(1)}•`);
+        if (l.startsWith("    -")) return l.replace("    -", `${tab(4)}○`)+"</div>";
+        if (l.startsWith("   -")) return l.replace("   -", `${tab(3)}•`)+"</div>";
+        if (l.startsWith("  -")) return l.replace("  -", `${tab(2)}○`)+"</div>";
+        if (l.startsWith(" -")) return l.replace(" -", `${tab(1)}•`)+"</div>";
         return l;
     }).join("<br>");
 
