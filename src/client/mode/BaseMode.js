@@ -116,12 +116,16 @@ export function markdown(message) {
     }
 
     var html = toHTML(message.content, markdownOptions);
-    return html.split("\n").map(l => { 
+    return html.split("<br>").map(l => { 
         if (l.startsWith("##### ")) return l.replace("##### ", "<h5>")+"</h5>";
         if (l.startsWith("#### ")) return l.replace("#### ", "<h4>")+"</h4>";
         if (l.startsWith("### ")) return l.replace("### ", "<h3>")+"</h3>";
         if (l.startsWith("## ")) return l.replace("## ", "<h2>")+"</h2>";
         if (l.startsWith("# ")) return l.replace("# ", "<h1>")+"</h1>";
+        if (l.startsWith("    -")) return l.replace("    -", "&nbsp;&nbsp;&nbsp;&nbsp;○");
+        if (l.startsWith("   -")) return l.replace("   -", "&nbsp;&nbsp;&nbsp;•");
+        if (l.startsWith("  -")) return l.replace("  -", "&nbsp;&nbsp;○");
+        if (l.startsWith(" -")) return l.replace(" -", "&nbsp;•");
         return l;
     }).join("\n");
 
