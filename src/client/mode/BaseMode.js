@@ -116,17 +116,17 @@ export function markdown(message) {
     }
 
     var html = toHTML(message.content, markdownOptions);
-    var tab = '<span class="tab">&nbsp;</span>';
+    var tab = (n) => '<div style="margin-left:'+n*4+'ex;">';
     return html.split("<br>").map(l => { 
         if (l.startsWith("##### ")) return l.replace("##### ", "<h5>")+"</h5>";
         if (l.startsWith("#### ")) return l.replace("#### ", "<h4>")+"</h4>";
         if (l.startsWith("### ")) return l.replace("### ", "<h3>")+"</h3>";
         if (l.startsWith("## ")) return l.replace("## ", "<h2>")+"</h2>";
         if (l.startsWith("# ")) return l.replace("# ", "<h1>")+"</h1>";
-        if (l.startsWith("    -")) return l.replace("    -", `${tab}${tab}${tab}${tab}○`);
-        if (l.startsWith("   -")) return l.replace("   -", `${tab}${tab}${tab}•`);
-        if (l.startsWith("  -")) return l.replace("  -", `${tab}${tab}○`);
-        if (l.startsWith(" -")) return l.replace(" -", `${tab}•`);
+        if (l.startsWith("    -")) return l.replace("    -", `${tab(4)}○`);
+        if (l.startsWith("   -")) return l.replace("   -", `${tab(3)}•`);
+        if (l.startsWith("  -")) return l.replace("  -", `${tab(2)}○`);
+        if (l.startsWith(" -")) return l.replace(" -", `${tab(1)}•`);
         return l;
     }).join("<br>");
 
