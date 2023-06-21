@@ -127,7 +127,7 @@ export function markdown(message) {
         if (l.startsWith("  -")) return l.replace("  -", "&nbsp;&nbsp;○");
         if (l.startsWith(" -")) return l.replace(" -", "&nbsp;•");
         return l;
-    }).join("\n");
+    }).join("<br>");
 
 }
 
