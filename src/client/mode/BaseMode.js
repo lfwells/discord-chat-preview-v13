@@ -106,6 +106,16 @@ export function autoScroll(element) {
 
 /** Creates a HTML representation of a message */
 export function markdown(message) {
+
+    var headingAfied = message.content.split("\n").map(l => { 
+        if (l.startsWith("##### ")) return l.replace("##### ", "<h5>")+"</h5>";
+        if (l.startsWith("#### ")) return l.replace("#### ", "<h4>")+"</h4>";
+        if (l.startsWith("### ")) return l.replace("### ", "<h3>")+"</h3>";
+        if (l.startsWith("## ")) return l.replace("## ", "<h2>")+"</h2>";
+        if (l.startsWith("# ")) return l.replace("# ", "<h1>")+"</h1>";
+        return l
+    }).join("\n");
+
     const markdownOptions = {
         discordCallback: {
             user: ({id})    => tagUser(id, message.mentions?.members),
@@ -114,7 +124,8 @@ export function markdown(message) {
         }
     }
 
-    return toHTML(message.content, markdownOptions);
+    return toHTML(headingAfied, markdownOptions);
+
 }
 
 export function trimEmoji(str) {
