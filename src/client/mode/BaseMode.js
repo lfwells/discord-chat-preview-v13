@@ -133,6 +133,7 @@ export function markdown(message) {
         if (l.startsWith("   -")) return l.replace("   -", `${tab(3)}•`)+"</div>";
         if (l.startsWith("  -")) return l.replace("  -", `${tab(2)}○`)+"</div>";
         if (l.startsWith(" -")) return l.replace(" -", `${tab(1)}•`)+"</div>";
+        if (l.startsWith("-")) return l.replace("-", `${tab(1)}•`)+"</div>";
         return l;
     }).join("<br>");
 
