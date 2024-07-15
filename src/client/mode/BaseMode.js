@@ -113,16 +113,9 @@ export function markdown(message) {
             channel: ({id}) => tagChannel(id, message.mentions?.channels),
             role: ({id})    => tagRole(id, message.mentions?.roles),
         },
-        escapeHTML: false
     }
 
-
-    // look through the html for any instances of markdown links using regex
-    // and replace them with the appropriate html
-    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
     var messageContent = message.content;
-    messageContent = messageContent.replace(regex, '<a href="$2" target="_blank">$1</a>');
-
     var html = toHTML(messageContent, markdownOptions);
 
 

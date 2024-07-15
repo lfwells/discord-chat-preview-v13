@@ -74,6 +74,12 @@ export class FlexMode extends BaseMode {
          $(`#${id}`).find('.content').removeClass('image-only');
          if (this.options.allowBigEmotes && $(`#${id}`).find('.content').text().trim().length == 0)
             $(`#${id}`).find('.content').addClass('image-only');
+
+    //handle markdown links in the dumbest way possible
+    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    var messageContent = $(`#${id}`).find('.content').html();
+    messageContent = messageContent.replace(regex, '<a href="$2" target="_blank">$1</a>');
+    $(`#${id}`).find('.content').html(messageContent);
      
         // Setup the reply
         const replyContainer = $(`#${id}`).find('.reply');
