@@ -112,7 +112,8 @@ export function markdown(message) {
             user: ({id})    => tagUser(id, message.mentions?.members),
             channel: ({id}) => tagChannel(id, message.mentions?.channels),
             role: ({id})    => tagRole(id, message.mentions?.roles),
-        }
+        },
+        escapeHTML: false
     }
 
 

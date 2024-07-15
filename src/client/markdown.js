@@ -9,6 +9,7 @@ export function tagChannel(id, channels) {
     const filtered = channels.filter(u => u.id === id);
     const name = (filtered.length ? filtered[0].name : id);
     const url = (filtered.length ? filtered[0].url : '#');
+    console.log({filtered, name, url});
     return `<span class='mention channel'><a href="${url}">#${name}</a></span>`;
 }
 
