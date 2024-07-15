@@ -119,8 +119,8 @@ export function markdown(message) {
     // look through the html for any instances of markdown links using regex
     // and replace them with the appropriate html
     var messageContent = message.content;
-    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    messageContent = messageContent.replace(regex, '<a href="$2" target="_blank">$1</a>');
+    //var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    //messageContent = messageContent.replace(regex, '<a href="$2" target="_blank">$1</a>');
 
     var html = toHTML(messageContent, markdownOptions);
 
