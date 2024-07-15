@@ -76,10 +76,18 @@ export class FlexMode extends BaseMode {
             $(`#${id}`).find('.content').addClass('image-only');
 
     //handle markdown links in the dumbest way possible
-    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    //we need to find the pattern [<a href="junk">url</a>](text) and replace it with <a href="url">text</a>
+    var regex = /\[<a href="(.*)">(.*)<\/a>\]\((.*)\)/g;
     var messageContent = $(`#${id}`).find('.content').html();
-    messageContent = messageContent.replace(regex, '<a href="$2" target="_blank">$1</a>');
+    var match = regex.exec(messageContent);
+    while (match != null) {
+        messageContent = messageContent.replace(match[0], '<a href="' + match[1] + '">' + match[3] + '</a>');
+        match = regex.exec(messageContent);
+    }
     $(`#${id}`).find('.content').html(messageContent);
+
+    //ensure all a tags have a blank target
+    $(`#${id}`).find('.content a').attr('target', '_blank');
      
         // Setup the reply
         const replyContainer = $(`#${id}`).find('.reply');
