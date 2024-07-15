@@ -75,13 +75,19 @@ export class FlexMode extends BaseMode {
          if (this.options.allowBigEmotes && $(`#${id}`).find('.content').text().trim().length == 0)
             $(`#${id}`).find('.content').addClass('image-only');
 
+
     //handle markdown links in the dumbest way possible
-    //we need to find the pattern [<a href="junk">url</a>](text) and replace it with <a href="url">text</a>
-    var regex = /\[<a href="(.*)">(.*)<\/a>\]\((.*)\)/g;
+    //we need to find the pattern [text]([<a href="junk">url</a>) and replace it with <a href="url">text</a>
+    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
     var messageContent = $(`#${id}`).find('.content').html();
     var match = regex.exec(messageContent);
     while (match != null) {
-        messageContent = messageContent.replace(match[0], '<a href="' + match[1] + '">' + match[3] + '</a>');
+        //take the text content of the link and replace it with the link
+        //use a regex to remove the text content from match[2]
+        var url = match[2].replace(/<[^>]*>/g, '');
+        //replace the match with the new link
+        messageContent = messageContent.replace(match[0], `<a href="${url}" target="_blank">${match[1]}</a>`);
+
         match = regex.exec(messageContent);
     }
     $(`#${id}`).find('.content').html(messageContent);

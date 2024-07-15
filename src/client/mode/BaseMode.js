@@ -113,9 +113,12 @@ export function markdown(message) {
             channel: ({id}) => tagChannel(id, message.mentions?.channels),
             role: ({id})    => tagRole(id, message.mentions?.roles),
         },
+        escapeHTML: false
     }
 
+
     var messageContent = message.content;
+
     var html = toHTML(messageContent, markdownOptions);
 
 
