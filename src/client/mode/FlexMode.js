@@ -79,9 +79,11 @@ export class FlexMode extends BaseMode {
     //handle markdown links in the dumbest way possible
     //we need to find the pattern [text]([<a href="junk">url</a>) and replace it with <a href="url">text</a>
     var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    var messageContent = $(`#${id}`).find('.content').html();
+    var messageContent = $(`#${id}`).html();
+    console.log({messageContent});
     var match = regex.exec(messageContent);
     while (match != null) {
+        console.log({match});
         //take the text content of the link and replace it with the link
         //use a regex to remove the text content from match[2]
         var url = match[2].replace(/<[^>]*>/g, '');
@@ -90,7 +92,7 @@ export class FlexMode extends BaseMode {
 
         match = regex.exec(messageContent);
     }
-    $(`#${id}`).find('.content').html(messageContent);
+    $(`#${id}`).html(messageContent);
 
     //ensure all a tags have a blank target
     $(`#${id}`).find('.content a').attr('target', '_blank');
