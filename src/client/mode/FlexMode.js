@@ -80,8 +80,9 @@ export class FlexMode extends BaseMode {
     //we need to find the pattern [text]([<a href="junk">url</a>) and replace it with <a href="url">text</a>
     var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
     var messageContent = $(`#${id}`).html();
+    var originalMessageContent = messageContent;
     console.log({messageContent});
-    var match = regex.exec(messageContent);
+    var match = regex.exec(originalMessageContent);
     while (match != null) {
         console.log({match});
         //take the text content of the link and replace it with the link
@@ -90,7 +91,7 @@ export class FlexMode extends BaseMode {
         //replace the match with the new link
         messageContent = messageContent.replace(match[0], `<a href="${url}" target="_blank">${match[1]}</a>`);
 
-        match = regex.exec(messageContent);
+        match = regex.exec(originalMessageContent);
     }
     $(`#${id}`).html(messageContent);
 
