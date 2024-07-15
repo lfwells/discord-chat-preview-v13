@@ -121,9 +121,9 @@ export function markdown(message) {
     // and replace them with the appropriate html
     var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
     var messageContent = message.content;
+    messageContent = messageContent.replace(regex, '<a href="$2" target="_blank">$1</a>');
 
     var html = toHTML(messageContent, markdownOptions);
-    html = html.replace(regex, '<a href="$2" target="_blank">$1</a>');
 
 
     var tab = (n) => '<div style="margin-left:'+n*4+'ex;">';

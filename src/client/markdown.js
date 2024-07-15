@@ -10,7 +10,7 @@ export function tagChannel(id, channels) {
     const name = (filtered.length ? filtered[0].name : id);
     const url = (filtered.length ? filtered[0].url : '#');
     console.log({filtered, name, url});
-    return `<span class='mention channel'><a href="${url}">#${name}</a></span>`;
+    return `<span class='mention channel'><strong>#${name}</strong></span>`;
 }
 
 export function tagRole(id, roles) {
