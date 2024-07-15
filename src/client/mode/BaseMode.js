@@ -116,6 +116,12 @@ export function markdown(message) {
     }
 
     var html = toHTML(message.content, markdownOptions);
+
+    // look through the html for any instances of markdown links using regex
+    // and replace them with the appropriate html
+    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    html = html.replace(regex, '<a href="$2" target="_blank">$1</a>');
+
     var tab = (n) => '<div style="margin-left:'+n*4+'ex;">';
     return html.split("<br>").map(l => { 
         if (l.startsWith("##### ")) return l.replace("##### ", "<h5>")+"</h5>";
